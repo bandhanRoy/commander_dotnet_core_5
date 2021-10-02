@@ -12,6 +12,7 @@ namespace Commander.Profiles
             CreateMap<Command, CommandReadDto>();
             CreateMap<CommandCreateDto, Command>();
             CreateMap<CommandUpdateDto, Command>().ForAllMembers(o => o.Condition((source, destination, member) => member != null && member as string != ""));
+            CreateMap<Command, CommandUpdateDto>();
         }
     }
 }
