@@ -1,19 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using Commander.Attributes;
 
 namespace Commander.Dtos
 {
-    public class CommandCreateDto
+    public class CommandUpdateDto
     {
-        
-        [Required]
+        [ConditionallyRequireAttribute]
         [MaxLength(250)]
         public string howTo { get; set; }
-        
-        [Required]
+
+        [ConditionallyRequireAttribute]
         public string line { get; set; }
-        
-        [Required]
+
+        [ConditionallyRequireAttribute]
         public string platform { get; set; }
     }
 }
-

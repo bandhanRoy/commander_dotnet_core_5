@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Commander.Data;
@@ -60,6 +61,21 @@ namespace Commander.Contollers
                 // return Ok(_mapper.Map<CommandReadDto>(commandModel));
             }
             return BadRequest();
+        }
+
+        // PUT api/commands/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateCommad(int id, CommandUpdateDto command)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if (commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(command, commandModelFromRepo);
+            _repository.UpdateCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
         }
     }
 }
