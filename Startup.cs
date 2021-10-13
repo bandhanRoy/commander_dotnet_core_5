@@ -13,8 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
-using Commander.Attributes;
+using Newtonsoft.Json.Serialization;
 
 namespace Commander
 {
@@ -37,7 +36,12 @@ namespace Commander
             // {
             //     options.Filters.Add(new RequireHttpsOrCloseAttribute());
             // });
-            services.AddControllers();
+
+            // for JSON and JSON PATCH
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICommanderRepo, MySQlCommanderRepo>();
@@ -52,6 +56,7 @@ namespace Commander
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseRouting();
 
