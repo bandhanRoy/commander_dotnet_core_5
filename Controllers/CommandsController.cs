@@ -6,6 +6,7 @@ using Commander.Entities;
 using Commander.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Commander.Contollers
 {
@@ -27,6 +28,7 @@ namespace Commander.Contollers
 
 
         // GET api/commands
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
@@ -100,6 +102,21 @@ namespace Commander.Contollers
             _repository.SaveChanges();
             return NoContent();
 
+        }
+
+        // DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(int id)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if (commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

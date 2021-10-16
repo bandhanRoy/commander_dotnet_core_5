@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using Commander.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Commander
 {
@@ -38,6 +39,14 @@ namespace Commander
             //     options.Filters.Add(new RequireHttpsOrCloseAttribute());
             // });
 
+            // add JWT Bearer authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.Audience = Configuration["ADD:ResourceId"];
+                opt.Authority = $"{Configuration["ADD:InstanceId"]}{Configuration["ADD:TenantId"]}";
+            });
+
             // for JSON and JSON PATCH
             services.AddControllers().AddNewtonsoftJson(s =>
             {
@@ -57,9 +66,14 @@ namespace Commander
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseCors();
+
             app.UseHttpsRedirection();
+
             app.UseRouting();
+            // * UseAuthorization should appear between app.UseRouting() and app.UseEndpoints(..) for authorization to be correctly evaluated
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
