@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Commander.Models;
+using Commander.Entities;
+using Commander.Interfaces;
 
 namespace Commander.Data
 {

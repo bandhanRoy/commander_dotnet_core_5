@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
-using Commander.Data;
 using Commander.Dtos;
-using Commander.Models;
+using Commander.Entities;
+using Commander.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 

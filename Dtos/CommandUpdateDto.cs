@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Commander.Attributes;
+using Commander.Helper;
 
 namespace Commander.Dtos
 {

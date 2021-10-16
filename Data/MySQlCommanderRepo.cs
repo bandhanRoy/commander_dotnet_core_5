@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Commander.Models;
+using Commander.Entities;
+using Commander.Interfaces;
 
 namespace Commander.Data
 {

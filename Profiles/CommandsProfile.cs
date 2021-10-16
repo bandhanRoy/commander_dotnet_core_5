@@ -1,6 +1,6 @@
 using AutoMapper;
 using Commander.Dtos;
-using Commander.Models;
+using Commander.Entities;
 
 namespace Commander.Profiles
 {
