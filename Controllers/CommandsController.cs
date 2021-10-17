@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Commander.Contollers
+namespace Commander.Controllers
 {
 
     // api/commands

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Commander.model
+namespace Commander.Models
 {
     public class AuthRequest
     {

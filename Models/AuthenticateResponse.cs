@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Commander.Entities;
 
-namespace Commander.model
+namespace Commander.Models
 {
     public class AuthResponse
     {
