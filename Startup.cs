@@ -72,7 +72,9 @@ namespace Commander
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // * DO NOT USE USE HTTPS REDIRECTION
+            // ! reason: https://stackoverflow.com/questions/28564961/authorization-header-is-lost-on-redirect
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

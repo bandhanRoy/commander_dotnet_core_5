@@ -15,8 +15,7 @@ namespace Commander.Middlewares
         }
         public async Task Invoke(HttpContext context, IUserService userService, IJwtHelper jwtHelper)
         {
-            // FIXME: Fetch token from Authorization key
-            var token = context.Request.Headers["token"].FirstOrDefault()?.Split(" ").Last();
+            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
                 attachUserToContext(context, userService, jwtHelper, token);
