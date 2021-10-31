@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-namespace Commander.Helper
+namespace Commander.Attributes
 {
 
     public class RequireHttpsOrCloseAttribute : RequireHttpsAttribute

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Commander.Helper
+namespace Commander.Attributes
 {
     public class ConditionallyRequireAttribute : ValidationAttribute
     {

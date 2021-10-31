@@ -1,3 +1,4 @@
+using Commander.Attributes;
 using Commander.Interfaces;
 using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,12 +27,12 @@ namespace Commander.Controllers
             return Ok(response);
         }
 
-        // [Authorize]
-        // [HttpGet]
-        // public IActionResult GetAll()
-        // {
-        //     var users = _userService.GetAll();
-        //     return Ok(users);
-        // }
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _userService.GetAllUsers();
+            return Ok(users);
+        }
     }
 }

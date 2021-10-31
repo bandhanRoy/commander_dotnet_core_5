@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Commander.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using Commander.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Commander.Helpers;
 using Commander.Services;
+using Commander.Middlewares;
 
 namespace Commander
 {
@@ -33,6 +27,8 @@ namespace Commander
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddControllers();
             // connect the database here
             services.AddDbContext<CommanderContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("CommanderConnection")));
             // add custom filter to all controller
@@ -76,13 +72,18 @@ namespace Commander
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors();
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // global cors policy
+            app.UseCors();
+
             // * UseAuthorization should appear between app.UseRouting() and app.UseEndpoints(..) for authorization to be correctly evaluated
             // app.UseAuthorization();
+
+            // custom jwt auth middleware
+            app.UseMiddleware<AuthMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
